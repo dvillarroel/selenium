@@ -1,28 +1,32 @@
 package task;
 
 class Rental {
-    private Movie _movie;
-    private int _daysRented;
+    private Movie movie;
+    private int daysRented;
 
     public Rental(Movie movie, int daysRented) {
-        _movie = movie;
-        _daysRented = daysRented;
-    }
-
-    public int getDaysRented() {
-        return _daysRented;
+        this.movie = movie;
+        this.daysRented = daysRented;
     }
 
     public int calculateRent(int days) {
-        return _daysRented * days;
+        return daysRented * days;
+    }
+
+    public double calculatePriceMovieByDays(int days) {
+        return movie.calculatePrice(days);
+    }
+
+    public int frequetRenter(int days) {
+        return movie.frequentRentRelease(days);
+    }
+
+    public int getDaysRented() {
+        return daysRented;
     }
 
     public Movie getMovie() {
-        return _movie;
+        return movie;
     }
-
-    public double calculatePriceMovieByDays() { return _movie.calculatePrice(_daysRented); }
-
-    public int frequetRenter() { return _movie.frequentRentRelease(_daysRented); }
 
 }

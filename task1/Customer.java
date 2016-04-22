@@ -1,49 +1,45 @@
 package task;
 
-import java.util.Enumeration;
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 class Customer {
-    private String _name;
-    private Vector _rentals = new Vector();
+    private final String name;
+    private List<Rental> rentals;
+    private Printer print;
+    private double totalAmount;
+    private int frequentRenterPoints;
+
 
     public Customer(String name) {
-        _name = name;
+
+        this.name = name;
+        rentals = new ArrayList();
+        print = new Printer();
+        totalAmount = 0;
+        frequentRenterPoints = 0;
+        print.addResult("Rental Record for " + name + "\n");
     }
 
     public void addRental(Rental arg) {
-        _rentals.addElement(arg);
-    }
 
-    public String getName() {
-        return _name;
+        rentals.add(arg);
+        totalAmount += arg.calculatePriceMovieByDays(arg.getDaysRented());
+        frequentRenterPoints += arg.frequetRenter(arg.getDaysRented());
+        print.addResult("\t" + arg.getMovie().getTitle() + "\t" +
+                String.valueOf(arg.calculatePriceMovieByDays(arg.getDaysRented())) + "\n");
     }
 
     public String statement() {
 
-        double totalAmount = 0;
-        int frequentRenterPoints = 0;
-        Enumeration rentals = _rentals.elements();
+        print.addResult("Amount owed is " + String.valueOf(totalAmount) + "\n")                ;
+        print.addResult("You earned " + String.valueOf(frequentRenterPoints)+
+                " frequent renter points");                ;
+        return print.getResult();
+    }
 
-        String result = "Rental Record for " + getName() + "\n";
 
-        while (rentals.hasMoreElements()) {
-
-            Rental each = (Rental) rentals.nextElement();
-            // add frequent renter points
-            frequentRenterPoints = frequentRenterPoints + 1 + each.frequetRenter();
-            //increase the total amount
-            totalAmount += each.calculatePriceMovieByDays();
-            //show figures for this rental
-            result += "\t" + each.getMovie().getTitle() + "\t" +
-                    String.valueOf(each.calculatePriceMovieByDays()) + "\n";
-        }
-        //add footer lines
-        result += "Amount owed is " + String.valueOf(totalAmount) +
-                "\n";
-        result += "You earned " + String.valueOf(frequentRenterPoints)
-                +
-                " frequent renter points";
-        return result;
+    public String getName() {
+        return name;
     }
 }
