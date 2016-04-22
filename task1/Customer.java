@@ -32,9 +32,10 @@ class Customer {
 
     public String statement() {
 
-        print.addResult("Amount owed is " + String.valueOf(totalAmount) + "\n")                ;
-        print.addResult("You earned " + String.valueOf(frequentRenterPoints)+
-                " frequent renter points");                ;
+        print.addResult("Amount owed is " + String.valueOf(totalAmount) + "\n");
+        print.addResult("You earned " + String.valueOf(frequentRenterPoints) +
+                " frequent renter points");
+        ;
         return print.getResult();
     }
 

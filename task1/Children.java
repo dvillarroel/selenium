@@ -5,12 +5,11 @@ package task;
  */
 public class Children extends Movie {
 
-    public Children(){
+    public Children() {
         super();
     }
 
-    public Children(String title)
-    {
+    public Children(String title) {
         super(title);
 
     }
