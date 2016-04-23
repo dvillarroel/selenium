@@ -1,4 +1,4 @@
-package task;
+package task1;
 
 class Rental {
     private Movie movie;

@@ -1,14 +1,10 @@
-package task;
+package task1;
 
 /**
  * Created by Administrator on 4/21/2016.
  */
 public class NewRelease extends Movie {
 
-
-    public NewRelease() {
-        super();
-    }
 
     public NewRelease(String title) {
         super(title);

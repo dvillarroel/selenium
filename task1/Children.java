@@ -1,13 +1,9 @@
-package task;
+package task1;
 
 /**
  * Created by Administrator on 4/21/2016.
  */
 public class Children extends Movie {
-
-    public Children() {
-        super();
-    }
 
     public Children(String title) {
         super(title);

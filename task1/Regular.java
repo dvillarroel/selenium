@@ -1,13 +1,9 @@
-package task;
+package task1;
 
 /**
  * Created by Administrator on 4/21/2016.
  */
 public class Regular extends Movie {
-
-    public Regular() {
-        super();
-    }
 
     public Regular(String title) {
         super(title);
