@@ -1,7 +1,6 @@
 import org.openqa.selenium.By;
 
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -42,12 +41,6 @@ public class SalesForce {
         driver.findElement(By.id("cpn10")).sendKeys("100");
         driver.findElement(By.id("cpn8")).sendKeys("8");
         driver.findElement(By.cssSelector("#bottomButtonRow >input")).click();
-
-
-
-
-
-
     }
 
 }
