@@ -23,8 +23,8 @@ public class SalesForce {
         driver.findElement(By.id("username")).sendKeys("dante.villarroel@jalasoft.com");
         driver.findElement(By.id("password")).sendKeys("Control123!@#");
         driver.findElement(By.id("Login")).click();
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//a[@href='/701/o']"))));
-        driver.findElement(By.xpath("//a[@href='/701/o']")).click();
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.cssSelector("#Campaign_Tab > a"))));
+        driver.findElement(By.cssSelector("#Campaign_Tab > a")).click();
         driver.findElement(By.name("new")).click();
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("cpn1"))));
         driver.findElement(By.id("cpn1")).sendKeys("Test-Campaign");
@@ -41,7 +41,7 @@ public class SalesForce {
         driver.findElement(By.id("cpn9")).sendKeys("200");
         driver.findElement(By.id("cpn10")).sendKeys("100");
         driver.findElement(By.id("cpn8")).sendKeys("8");
-        driver.findElement(By.xpath("//input[@tabindex='14']")).click();
+        driver.findElement(By.cssSelector("#bottomButtonRow >input")).click();
 
 
 
