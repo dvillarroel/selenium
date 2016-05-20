@@ -2,6 +2,8 @@ package com.jalasoft.testing;
 
 import com.jalasoft.testing.pages.*;
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import javax.swing.text.StyledEditorKit;
@@ -11,21 +13,23 @@ import javax.swing.text.StyledEditorKit;
  */
 public class LoginTest {
 
-    @Test
-    public void testLogin() {
-        String expectedCampaignName = "New Campaign 00001";
-        Boolean expectedActive = true;
-        String expectedType = "Search";
-        String expectedDescription = "Description Campaign";
-        String expectedStatus = "Planned";
-        String expectedStartDate = "5/17/2016";
-        String expectedEndDate = "5/18/2016";
-        String expectedNumSent = "10";
-        String expectedResponse = "10.00";
-        String expectedBudgetedCost = "15";
-        String expectedActualCost = "10";
-        String expectedRevenue = "10";
+    private MainContainer mainContainer;
 
+    private TabBar tabBar;
+
+    @BeforeClass
+    public void setup(){
+        Login login = new Login();
+        mainContainer = login.loginAs("dante.villarroel@jalasoft.com", "Control123!@#");
+    }
+
+    @BeforeMethod
+    public void beforeMethod(){
+        tabBar = mainContainer.goToTabBar();
+    }
+
+    @Test
+    public void testLeads(){
         String expectedLeadsStatus = "Working";
         String expectedLeadsSalutation = "Dr.";
         String expectedLeadsName = "Name Test";
@@ -48,38 +52,6 @@ public class LoginTest {
         String expectedLeadsZip = "0000";
         String expectedLeadsCountry = "Bolivia";
         Boolean expectedLeadsAssign = true;
-
-
-
-        Login login = new Login();
-        MainContainer mainContainer =
-                login.loginAs("dante.villarroel@jalasoft.com", "Control123!@#");
-
-        TabBar tabBar = mainContainer.goToTabBar();
-        CampaignHome campaignHome = tabBar.clickCampaignsTab();
-        NewCampaignForm newCampaignForm = campaignHome.clickNewButton();
-        newCampaignForm.setCampaignNameTextField(expectedCampaignName);
-        newCampaignForm.clickCampaignActiveSelect(expectedActive);
-        newCampaignForm.setCampaignType(expectedType);
-        newCampaignForm.setCampaignDescription(expectedDescription);
-        newCampaignForm.setCampaignStatus(expectedStatus);
-        newCampaignForm.setCampaignStartDate(expectedStartDate);
-        newCampaignForm.setCampaignEndDate(expectedEndDate);
-        newCampaignForm.setCampaignNumSent(expectedNumSent);
-        newCampaignForm.setCampaignResponse(expectedResponse);
-        newCampaignForm.setCampaignBudgetedCost(expectedBudgetedCost);
-        newCampaignForm.setCampaignActualCost(expectedActualCost);
-        newCampaignForm.setCampaignRevenue(expectedRevenue);
-
-        CampaignDetail campaignDetail = newCampaignForm.clickSaveButton();
-
-        Assert.assertEquals(campaignDetail.getCampaignName(),
-                expectedCampaignName + " [View Hierarchy]");
-
-        Assert.assertEquals(campaignDetail.getCampaignActive(),
-                "Checked");
-
-
 
         LeadsHome leadsHome = tabBar.clickLeadsTab();
         NewLeadsForm newLeadsForm = leadsHome.clickNewButton();
@@ -104,15 +76,95 @@ public class LoginTest {
         newLeadsForm.setLeadsProvince(expectedLeadsProvince);
         newLeadsForm.setLeadsZip(expectedLeadsZip);
         newLeadsForm.setLeadsCountry(expectedLeadsCountry);
-        newLeadsForm.clickLeadsAsign();
+        //newLeadsForm.clickLeadsAsign();
 
         LeadsDetail leadsDetail = newLeadsForm.clickSaveButton();
 
+        Assert.assertEquals(leadsDetail.getLeadsStatus(),
+                expectedLeadsStatus);
+        Assert.assertEquals(leadsDetail.getLeadsFullName(),
+                expectedLeadsSalutation + " " + expectedLeadsName + " " + expectedLeadsMiddleName + " " + expectedLeadsLastName + " " + expectedLeadsSuffix);
+        Assert.assertEquals(leadsDetail.getLeadsTitle(),
+                expectedLeadsTitle);
+        Assert.assertEquals(leadsDetail.getLeadsEmail(),
+                expectedLeadsEmail);
+        Assert.assertEquals(leadsDetail.getLeadsPhone(),
+                expectedLeadsPhone);
+        Assert.assertEquals(leadsDetail.getLeadsMobile(),
+                expectedLeadsMobile);
+        Assert.assertEquals(leadsDetail.getLeadsRating(),
+                expectedLeadsRating);
+        Assert.assertEquals(leadsDetail.getLeadsWebSite(),
+                expectedLeadsWebSite);
+        Assert.assertEquals(leadsDetail.getLeadsCompany(),
+                expectedLeadsCompany);
+        Assert.assertEquals(leadsDetail.getLeadsIndustry(),
+                expectedLeadsIndustry);
+        Assert.assertEquals(leadsDetail.getLeadsNumEmp(),
+                expectedLeadsNumEmp);
+        Assert.assertEquals(leadsDetail.getLeadsSource(),
+                expectedLeadsSource);
+        Assert.assertEquals(leadsDetail.getLeadsAddress(),
+                expectedLeadsStreet + "\n" + expectedLeadsCity + ", " + expectedLeadsProvince + " " + expectedLeadsZip + "\n" + expectedLeadsCountry);
+    }
 
-        //Assert.assertEquals(campaignDetail.getCampaignName() + " [View Hierarchy]",
-        //        expectedCampaignName);
+    @Test
+    public void testCampaign() {
+        String expectedCampaignName = "New Campaign 00001";
+        Boolean expectedActive = true;
+        String expectedType = "Search";
+        String expectedDescription = "Description Campaign";
+        String expectedStatus = "Planned";
+        String expectedStartDate = "5/17/2016";
+        String expectedEndDate = "5/18/2016";
+        String expectedNumSent = "10";
+        String expectedResponse = "10.00";
+        String expectedBudgetedCost = "15";
+        String expectedActualCost = "10";
+        String expectedRevenue = "10";
 
 
+        CampaignHome campaignHome = tabBar.clickCampaignsTab();
+        NewCampaignForm newCampaignForm = campaignHome.clickNewButton();
+        newCampaignForm.setCampaignNameTextField(expectedCampaignName);
+        newCampaignForm.clickCampaignActiveSelect(expectedActive);
+        newCampaignForm.setCampaignType(expectedType);
+        newCampaignForm.setCampaignDescription(expectedDescription);
+        newCampaignForm.setCampaignStatus(expectedStatus);
+        newCampaignForm.setCampaignStartDate(expectedStartDate);
+        newCampaignForm.setCampaignEndDate(expectedEndDate);
+        newCampaignForm.setCampaignNumSent(expectedNumSent);
+        newCampaignForm.setCampaignResponse(expectedResponse);
+        newCampaignForm.setCampaignBudgetedCost(expectedBudgetedCost);
+        newCampaignForm.setCampaignActualCost(expectedActualCost);
+        newCampaignForm.setCampaignRevenue(expectedRevenue);
+
+        CampaignDetail campaignDetail = newCampaignForm.clickSaveButton();
+
+        Assert.assertEquals(campaignDetail.getCampaignName(),
+                expectedCampaignName + " [View Hierarchy]");
+        Assert.assertEquals(campaignDetail.getCampaignActive(),
+                "Checked");
+        Assert.assertEquals(campaignDetail.getCampaignType(),
+                expectedType);
+        Assert.assertEquals(campaignDetail.getCampaignDescription(),
+                expectedDescription);
+        Assert.assertEquals(campaignDetail.getCampaignStatus(),
+                expectedStatus);
+        Assert.assertEquals(campaignDetail.getCampaignStartDate(),
+                expectedStartDate);
+        Assert.assertEquals(campaignDetail.getCampaignEndDate(),
+                expectedEndDate);
+        Assert.assertEquals(campaignDetail.getCampaignNumSent(),
+                expectedNumSent);
+        Assert.assertEquals(campaignDetail.getCampaignResponse(),
+                expectedResponse+"%");
+        Assert.assertEquals(campaignDetail.getCampaignBudgetedCost(),
+                "¤"+expectedBudgetedCost);
+        Assert.assertEquals(campaignDetail.getCampaignActualCost(),
+                "¤"+expectedActualCost);
+        Assert.assertEquals(campaignDetail.getCampaignRevenue(),
+                "¤"+expectedRevenue);
 
     }
 }

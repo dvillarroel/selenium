@@ -48,10 +48,10 @@ public class NewCampaignForm extends AbstractBasePage {
     @FindBy(name = "save")
     private WebElement saveButton;
 
+    SetValues values = new SetValues();
+
     public void setCampaignNameTextField(String campaignName) {
-        wait.until(ExpectedConditions.visibilityOf(campaignNameTextField));
-        campaignNameTextField.clear();
-        campaignNameTextField.sendKeys(campaignName);
+        values.setTextField(campaignNameTextField,campaignName);
     }
 
     public CampaignDetail clickSaveButton() {
@@ -60,59 +60,47 @@ public class NewCampaignForm extends AbstractBasePage {
     }
 
     public void clickCampaignActiveSelect(Boolean expectedActive) {
-        if(campaignActive.isSelected() == false) {
-            campaignActive.click();
-        }
+        values.setCheckBox(campaignActive);
     }
 
     public void setCampaignType(String expectedType) {
-        Select combobox = new Select(campaignType);
-        combobox.selectByValue(expectedType);
+        values.setComboBox(campaignType,expectedType);
     }
 
     public void setCampaignDescription(String expectedDescription) {
-        campaignDescription.clear();
-        campaignDescription.sendKeys(expectedDescription);
+        values.setTextField(campaignDescription,expectedDescription);
     }
 
     public void setCampaignStatus(String expectedStatus) {
-        Select combobox = new Select(campaignStatus);
-        combobox.selectByValue(expectedStatus);
+        values.setComboBox(campaignStatus,expectedStatus);
     }
 
     public void setCampaignStartDate(String expectedStartDate) {
-        campaignStarDate.clear();
-        campaignStarDate.sendKeys(expectedStartDate);
+        values.setTextField(campaignStarDate,expectedStartDate);
     }
 
     public void setCampaignEndDate(String expectedEndDate) {
-        campaignEndDate.clear();
-        campaignEndDate.sendKeys(expectedEndDate);
+        values.setTextField(campaignEndDate,expectedEndDate);
     }
 
     public void setCampaignNumSent(String expectedNumSent) {
-        campaignNumSent.clear();
-        campaignNumSent.sendKeys(expectedNumSent);
+        values.setTextField(campaignNumSent,expectedNumSent);
     }
 
     public void setCampaignResponse(String expectedResponse) {
-        campaignResponse.clear();
-        campaignResponse.sendKeys(expectedResponse);
+        values.setTextField(campaignResponse,expectedResponse);
     }
 
     public void setCampaignBudgetedCost(String expectedBudgetedCost) {
-        campaignBudgetedCost.clear();
-        campaignBudgetedCost.sendKeys(expectedBudgetedCost);
+        values.setTextField(campaignBudgetedCost,expectedBudgetedCost);
     }
 
     public void setCampaignActualCost(String expectedActualCost) {
-        campaignActualCost.clear();
-        campaignActualCost.sendKeys(expectedActualCost);
+        values.setTextField(campaignActualCost,expectedActualCost);
     }
 
     public void setCampaignRevenue(String expectedRevenue) {
-        campaignRevenue.clear();
-        campaignRevenue.sendKeys(expectedRevenue);
+        values.setTextField(campaignRevenue,expectedRevenue);
     }
 
 }

@@ -15,4 +15,6 @@ public abstract class AbstractBasePage {
         wait = WebDriverManager.getInstance().getWait();
         PageFactory.initElements(driver, this);
     }
+
+
 }
