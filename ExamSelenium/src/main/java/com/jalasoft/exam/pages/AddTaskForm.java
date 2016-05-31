@@ -27,7 +27,10 @@ public class AddTaskForm extends AbstractBasePage {
     @FindBy(css = ".truncated.p_name")
     private WebElement selectProject;
 
-    @FindBy(id = "project_color_170354058")
+    @FindBy(id = "amicomplete_floater")
+    private WebElement containerProjects;
+
+    @FindBy(id = "project_color_170354057")
     private WebElement projetName;
 
     WebElementAction action = new WebElementAction();
@@ -54,16 +57,17 @@ public class AddTaskForm extends AbstractBasePage {
 
     public void setSelectProject(){
 
-        action.clickWebElement(projetName);
+        //action.clickWebElement(projetName);
+        containerProjects.findElement(By.id("project_color_170354057")).click();
     }
 
-    public MainMenu addQuickTask(String value){
+    public Inbox addQuickTask(String value){
         setAddTaskField(value);
         clickPriority();
         selectPriority();
         clickSelectProject();
         setSelectProject();
         clickAddTaskButton();
-        return new MainMenu();
+        return new Inbox();
     }
 }

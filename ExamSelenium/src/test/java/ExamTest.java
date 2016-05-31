@@ -5,6 +5,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 /**
  * Created by Dante Villarroel on 5/28/2016.
@@ -31,6 +32,7 @@ public class ExamTest {
         LeftMenu leftMenu = mainContainer.goToLeftMenu();
         Inbox inbox = leftMenu.clickInbox();
         inbox.addNewTask("New Task Auto");
+        assertTrue(inbox.taskIsAdd("New Task Auto"));
 
     }
 
@@ -38,7 +40,8 @@ public class ExamTest {
     public void addQuickTask(){
         Header header = mainContainer.goToHeader();
         AddTaskForm addTaskForm = header.clickAddQuickTask();
-        addTaskForm.addQuickTask("New Task Quick");
+        Inbox inbox = addTaskForm.addQuickTask("New Task Quick");
+        assertTrue(inbox.taskIsAdd("New Task Quick"));
 
     }
 
@@ -46,39 +49,4 @@ public class ExamTest {
     public void deleteTask(){
 
     }
-
-
-
-
-/*
-    @BeforeMethod
-    public void beforeMethod() {
-        tabBar = mainContainer.goToTabBar();
-    }
-
-    @Test
-    public void testCreateCampaign() {
-        String expectedCampaignName = "New Campaign 00001";
-
-        CampaignHome campaignHome = tabBar.clickCampaignsTab();
-        NewCampaignForm newCampaignForm = campaignHome.clickNewButton();
-        newCampaignForm.setCampaignNameTextField(expectedCampaignName);
-        CampaignDetail campaignDetail = newCampaignForm.clickSaveButton();
-
-        assertEquals(campaignDetail.getCampaignName() + " [View Hierarchy]",
-                expectedCampaignName);
-    }
-
-    @Test
-    public void testPrivacyLink() {
-        Footer footer = mainContainer.gotToFooter();
-        Privacy privacy =  footer.clickPrivacyLink();
-
-        assertEquals(privacy.getTitleText(), "Privacy Statements");
-
-        privacy.switchMainWindow();
-    }
-*/
-
-
 }

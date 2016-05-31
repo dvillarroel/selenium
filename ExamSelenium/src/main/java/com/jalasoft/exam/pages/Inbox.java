@@ -4,6 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import static org.jboss.netty.util.internal.SystemPropertyUtil.contains;
+
 /**
  * Created by Dante Villarroel on 5/30/2016.
  */
@@ -65,6 +67,12 @@ public class Inbox extends AbstractBasePage{
 
     }
 
-
-
+    public boolean taskIsAdd(String s) {
+        if(listEditor.getText().contains(s)){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }
